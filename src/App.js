@@ -9,7 +9,7 @@ import SignInAndSignUpPage from './pages/sign-in-and-sing-up/sign-in-and-sing-up
 import Header from './components/header/header.component';
 import { auth } from "./firebase/firebase.utils"
 
-class App extends React.component{
+class App extends React.Component{
   constructor(){
     super();
 
@@ -17,17 +17,20 @@ class App extends React.component{
       currentUser : null
     }
   }
-  
+    unsubscribeFromAuth = null 
+
    componentDidMount(){
-     auth.onAuthStateChanged(user => {
+     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
        this.setState({currentUser : user})
      })
    }
-
+   componentWillUnmount(){
+     this.unsubscribeFromAuth();
+   }
   render(){
     return (
       <div className='App'>
-      <Header />
+      <Header currentUser={this.state.currentUser}/>
       <Switch>
         <Route exact path ='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
