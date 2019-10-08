@@ -12,7 +12,9 @@
     font-family: 'Open Sans Condensed';
     border: none;
     cursor: pointer;
-
+    display: flex;
+    justify-content: center;
+    
     &:hover {
         background-color: white;
         color: black;
@@ -27,6 +29,7 @@
         }
     
     }
+
     &.inverted{
         background-color: white;
         color: black;
